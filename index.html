@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Route system audio to multiple output devices simultaneously using your web browser."
+    />
+    <title>AUDIO_LINK</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="background-animation"></div>
+
+    <main class="container">
+      <header>
+        <h1>Multi-Device Web Audio Router</h1>
+        <p class="subtitle">Broadcast audio to multiple devices from your browser</p>
+      </header>
+
+      <section class="controls-panel">
+        <button id="startCapture" class="btn-primary">▶ Start Capture</button>
+        <button id="stopCapture" class="btn-danger">⏹️ Stop Capture</button>
+        <button id="addRoute" class="btn-secondary">✚ Add Route</button>
+        <button id="playAll">▶ Play All</button>
+        <button id="stopAll">■ Stop All</button>
+        <button id="refreshDevices">🔄 Refresh Devices</button>
+      </section>
+
+      <p id="info" class="status-text" aria-live="polite"></p>
+      <p id="warn" class="warning-text" aria-live="polite"></p>
+
+      <div id="onboarding-container" class="onboarding-panel"></div>
+
+      <ul id="routes" class="routes-grid"></ul>
+    </main>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>

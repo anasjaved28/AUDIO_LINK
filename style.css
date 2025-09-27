@@ -1,0 +1,235 @@
+/* --- Global Setup & Variables --- */
+:root {
+  --font-family: "Poppins", sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --transition-speed: 250ms;
+
+  /* --- NEW VIBRANT COLOR PALETTE --- */
+  --text-light: rgba(255, 255, 255, 0.95);
+  --text-dark: rgba(255, 255, 255, 0.65);
+  --glass-bg: rgba(22, 22, 29, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Button Colors */
+  --color-green: #22c55e;  /* Start */
+  --color-rose: #f43f5e;   /* Stop */
+  --color-blue: #3b82f6;   /* Add Route */
+  --color-indigo: #6366f1; /* Play All */
+  --color-slate: #475569;  /* Stop All */
+  --color-amber: #f59e0b; /* Refresh */
+  
+  /* Status Colors */
+  --color-yellow: #facc15;
+}
+
+/* --- Base & Animated Background --- */
+body {
+  background-color: #0c0c10;
+  font-family: var(--font-family);
+  color: var(--text-light);
+  margin: 0;
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(
+    45deg,
+    #ff00de,
+    #4600ff,
+    #00b4d8,
+    #00ffc3,
+    #ff00de
+  );
+  background-size: 400% 400%;
+  animation: gradient-flow 15s ease infinite;
+  filter: blur(100px);
+  opacity: 0.4;
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- Layout & Typography --- */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+}
+
+header {
+  text-align: center;
+}
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+  background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.6));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+header .subtitle {
+  font-size: 1rem;
+  color: var(--text-dark);
+  margin-top: 0.25rem;
+}
+
+/* --- Glassmorphism Panels --- */
+.controls-panel, .route-card, .onboarding-panel {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+}
+
+.controls-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+}
+
+/* --- UPDATED BUTTON STYLES --- */
+button {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  color: var(--text-light);
+  box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.2);
+}
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 25px 0 rgba(0, 0, 0, 0.3);
+  filter: brightness(1.1);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: translateY(0);
+  background-color: var(--color-slate) !important;
+  box-shadow: none;
+}
+
+/* --- ASSIGNING UNIQUE COLORS TO EACH BUTTON --- */
+#startCapture { background-color: var(--color-green); }
+#stopCapture { background-color: var(--color-rose); }
+#addRoute { background-color: var(--color-blue); }
+#playAll { background-color: var(--color-indigo); }
+#stopAll { background-color: var(--color-slate); }
+#refreshDevices { background-color: var(--color-amber); }
+
+/* Buttons within the route cards */
+.route-card button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+.route-card .play-btn { background-color: var(--color-green); }
+.route-card .pause-btn { background-color: var(--color-amber); }
+.route-card .remove-btn { background-color: var(--color-rose); }
+
+
+/* --- Route Card --- */
+.route-card {
+  list-style: none;
+  display: grid;
+  gap: 1.25rem;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.route-card:hover {
+  transform: scale(1.02);
+}
+.route-card.is-playing {
+  box-shadow: 0 0 25px 5px rgba(34, 197, 94, 0.4);
+  border-color: rgba(34, 197, 94, 0.7);
+}
+.route-card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+.route-card .controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.route-card .button-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* --- Forms & Sliders --- */
+label { display: block; font-size: 0.875rem; color: var(--text-dark); }
+select, input[type="number"] {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.25rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem;
+  color: var(--text-light);
+  font-family: inherit;
+}
+
+/* --- THIS IS THE FIX --- */
+/* Ensures dropdown options are visible in dark mode */
+select option {
+  background: var(--color-slate);
+  color: var(--text-light);
+}
+/* --- END OF FIX --- */
+
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 6px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px; outline: none; cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--text-light);
+  box-shadow: 0 0 4px rgba(0,0,0,0.5);
+  transition: background var(--transition-speed) ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover { background: #fff; }
+
+/* --- VU Meter --- */
+.vu-meter { height: 6px; background-color: rgba(0, 0, 0, 0.3); border-radius: 3px; overflow: hidden; }
+.vu-bar {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--color-green), var(--color-yellow), var(--color-rose));
+  transition: width 60ms linear;
+}
+
+/* --- Status & Onboarding --- */
+.status-text, .warning-text { text-align: center; min-height: 1.2em; font-weight: 500;}
+.warning-text { color: var(--color-yellow); }
+.onboarding-panel { text-align: center; color: var(--text-dark); }
